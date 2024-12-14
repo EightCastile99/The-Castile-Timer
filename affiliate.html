@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affiliate - The Castile Timer</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+        }
+        .affiliate-links {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 10px;
+        }
+        .affiliate-form {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .submit-btn {
+            background: #003366;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background: #004080;
+        }
+        .affiliate-stats {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f8ff;
+            border-radius: 10px;
+            display: none;
+        }
+        .error-message {
+            color: red;
+            margin: 10px 0;
+            display: none;
+        }
+        .success-message {
+            color: green;
+            margin: 10px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html"><div class="logo">The Castile Timer</div></a>
+        <nav>
+            <a href="affiliate.html">Affiliate</a>
+            <a href="donate.html">Donate</a>
+            <a href="membership.html">Membership</a>
+            <a href="premium.html">Premium</a>
+            <a href="worldtime.html">World Time</a>
+            <a href="about.html">About</a>
+            <a href="contact us.html">Contact us</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="content">
+            <h1>Affiliate Program</h1>
+            <p>Join our affiliate program and earn rewards by promoting The Castile Timer.</p>
+            
+            <!-- Affiliate Registration Form -->
+            <div class="affiliate-form">
+                <h2>Register as an Affiliate</h2>
+                <div class="error-message" id="error-message"></div>
+                <div class="success-message" id="success-message"></div>
+                <form id="affiliate-form">
+                    <div class="form-group">
+                        <label for="name">Full Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Register</button>
+                </form>
+            </div>
+
+            <!-- Affiliate Statistics -->
+            <div class="affiliate-stats" id="affiliate-stats">
+                <h2>Your Affiliate Statistics</h2>
+                <p>Affiliate Link: <span id="affiliate-link"></span></p>
+                <p>Total Clicks: <span id="clicks">0</span></p>
+                <p>Total Conversions: <span id="conversions">0</span></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <a href="index.html"><div class="logo">The Castile Timer</div></a>
+        <div style="display: flex; justify-content: space-around; align-items: center; padding: 20px;">
+            <nav>
+                <a href="donate.html">Donate Us</a>
+                <a href="blog.html">Blog</a>
+                <a href="membership.html">Membership</a>
+                <a href="PrivacyandPolicy.html">Privacy Policy</a>
+                <a href="affiliate.html">affiliate</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        // Store affiliate ID in localStorage
+        let affiliateId = localStorage.getItem('affiliateId');
+
+        // Function to update affiliate stats
+        async function updateAffiliateStats() {
+            if (!affiliateId) return;
+
+            try {
+                const response = await fetch(`http://localhost:5000/affiliate_stats/${affiliateId}`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('affiliate-link').textContent = data.affiliate_link;
+                    document.getElementById('clicks').textContent = data.clicks;
+                    document.getElementById('conversions').textContent = data.conversions;
+                    document.getElementById('affiliate-stats').style.display = 'block';
+                    document.getElementById('affiliate-form').style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error fetching affiliate stats:', error);
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('affiliate-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+
+            try {
+                const response = await fetch('http://localhost:5000/create_affiliate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, email }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    affiliateId = data.affiliate_id;
+                    localStorage.setItem('affiliateId', affiliateId);
+                    
+                    successMessage.textContent = 'Registration successful!';
+                    successMessage.style.display = 'block';
+                    errorMessage.style.display = 'none';
+                    
+                    // Update stats after successful registration
+                    updateAffiliateStats();
+                } else {
+                    errorMessage.textContent = data.error || 'Registration failed. Please try again.';
+                    errorMessage.style.display = 'block';
+                    successMessage.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error registering affiliate:', error);
+                errorMessage.textContent = 'An error occurred. Please try again later.';
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+            }
+        });
+
+        // Check for existing affiliate and update stats on page load
+        if (affiliateId) {
+            updateAffiliateStats();
+        }
+    </script>
+</body>
+</html>

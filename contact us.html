@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Castile Timer</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #003366;
+            color: white;
+        }
+
+        header a, footer a {
+            text-decoration: none;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Announcement Section */
+        .announcement {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .announcement-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .announcement strong {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .announcement a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .announcement a:hover {
+            color: #f0f0f0;
+        }
+
+        /* Side Announcements */
+        .side-announcements {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            z-index: 100;
+        }
+
+        .side-announcement {
+            background: linear-gradient(135deg, #003366, #004080);
+            color: white;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .side-announcement.left {
+            left: 20px;
+        }
+
+        .side-announcement.right {
+            right: 20px;
+        }
+
+        .side-announcement h3 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .side-announcement p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .side-announcement a {
+            color: #fff;
+            text-decoration: underline;
+            font-size: 14px;
+        }
+
+        .side-announcement a:hover {
+            color: #f0f0f0;
+        }
+
+        @media (max-width: 1200px) {
+            .side-announcements {
+                display: none;
+            }
+        }
+
+        /* Contact Form Section */
+        .contact-form {
+            width: 80%;
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+        }
+
+        .contact-form h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-row label {
+            width: 30%;
+            text-align: right;
+            margin-right: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .form-row input,
+        .form-row textarea {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            resize: none;
+            box-sizing: border-box;
+        }
+
+        .form-row input::placeholder,
+        .form-row textarea::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .contact-form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .contact-form button:hover {
+            background-color: #45a049;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            padding: 10px 20px;
+            background-color: #003366;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer .logo {
+            font-size: 24px;
+        }
+
+        footer nav a {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html"><div class="logo">The Castile Timer</div></a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="worldtime.html">World time</a>
+        </nav>
+    </header>
+
+    <!-- Announcement Section -->
+    <div class="announcement">
+        <div class="announcement-content">
+            <strong>💌 Get in Touch!</strong> We'd love to hear your feedback and suggestions. 
+            <a href="about.html">Check our features</a>
+        </div>
+    </div>
+
+    <!-- Side Announcements -->
+    <div class="side-announcements left">
+        <div class="side-announcement">
+            <h3>📞 24/7 Support</h3>
+            <p>We're here to help!</p>
+            <a href="about.html">Support Hours</a>
+        </div>
+        <div class="side-announcement">
+            <h3>📱 Social Media</h3>
+            <p>Follow us for updates</p>
+            <a href="about.html">Our Channels</a>
+        </div>
+    </div>
+
+    <div class="side-announcements right">
+        <div class="side-announcement">
+            <h3>❓ FAQ</h3>
+            <p>Common questions</p>
+            <a href="about.html">Read More</a>
+        </div>
+        <div class="side-announcement">
+            <h3>🎯 Feature Request</h3>
+            <p>Share your ideas!</p>
+            <a href="about.html">Submit Here</a>
+        </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="contact-form">
+        <h2>Contact Us</h2>
+        <form action="https://formspree.io/f/mgvebqra" method="POST">
+            <div class="form-row">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="John Doe" required>
+            </div>
+
+            <div class="form-row">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="john.doe@example.com" required>
+            </div>
+
+            <div class="form-row">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+            </div>
+
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <a href="index.html"><div class="logo">The Castile Timer</div></a>
+        <div style="display: flex; justify-content: space-around; align-items: center; padding: 20px;">
+            <nav>
+                <a href="donate.html">Donate Us</a>
+                <a href="blog.html">Blog</a>
+                <a href="membership.html">Membership</a>
+                <a href="PrivacyandPolicy.html">Privacy Policy</a>
+                <a href="affiliate.html">affiliate</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>
